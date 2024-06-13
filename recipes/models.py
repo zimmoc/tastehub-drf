@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Recipe(models.Model):
-    author = models.OneToOneField(User, on_delete=models.CASCADE)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255)
@@ -16,4 +16,4 @@ class Recipe(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.title} by {self.author}"
+        return f"{self.title} by {self.owner}"

@@ -4,10 +4,10 @@ from recipes.models import Recipe
 
 
 class RecipeSerializer(serializers.ModelSerializer):
-    author = serializers.ReadOnlyField(source='author.username')
+    owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
-    profile_id = serializers.ReadOnlyField(source='author.profile.id')
-    profile_image = serializers.ReadOnlyField(source='author.profile.image.url')
+    profile_id = serializers.ReadOnlyField(source='owner.profile.id')
+    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
@@ -27,13 +27,13 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     def get_is_owner(self, obj):
         request = self.context['request']
-        return request.user == obj.author
+        return request.user == obj.owner
     
     def get_like_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
             like = Like.objects.filter(
-                owner=user, post=obj
+                owner=user, recipe=obj
             ).first()
             return like.id if like else None
         return None
@@ -41,7 +41,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = [
-            'id', 'author', 'created_at', 'updated_at', 'title', 'description',
+            'id', 'owner', 'created_at', 'updated_at', 'title', 'description',
             'image', 'ingredients', 'instructions', 'is_owner', 'profile_id',
-            'profile_image', 'like_id', 'likes_count',gi
+            'profile_image', 'like_id', 'likes_count', 'comments_count'
         ]
