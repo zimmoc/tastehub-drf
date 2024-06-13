@@ -8,6 +8,9 @@ class RecipeList(generics.ListAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class RecipeDetail(generics.RetrieveUpdateAPIView):
     permission_classes = [IsOwnerOrReadOnly]
