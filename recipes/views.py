@@ -5,7 +5,7 @@ from recipes.models import Recipe
 from recipes.serializers import RecipeSerializer
 
 
-class RecipeList(generics.ListAPIView):
+class RecipeList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = RecipeSerializer
     queryset = Recipe.objects.annotate(
@@ -17,7 +17,7 @@ class RecipeList(generics.ListAPIView):
         serializer.save(owner=self.request.user)
 
 
-class RecipeDetail(generics.RetrieveUpdateAPIView):
+class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = RecipeSerializer
     queryset = Recipe.objects.annotate(
