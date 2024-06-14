@@ -11,6 +11,7 @@ class RecipeList(generics.ListCreateAPIView):
     queryset = Recipe.objects.annotate(
         comments_count = Count('comment', distinct=True),
         likes_count = Count('likes', distinct=True),
+        ratings_count = Count('ratings', distinct=True)
     ).order_by('-created_at')
 
     def perform_create(self, serializer):

@@ -1,6 +1,8 @@
 from likes.models import Like
 from rest_framework import serializers
 from recipes.models import Recipe
+from ratings.models import Rating
+from django.db.models import Avg
 
 
 class RecipeSerializer(serializers.ModelSerializer):
@@ -11,6 +13,8 @@ class RecipeSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
+    ratings_count = serializers.ReadOnlyField()
+    average_rating = serializers.SerializerMethodField()
 
     def validate_image(self, value):
         if value.size > 2 * 1024 * 1024:
@@ -37,11 +41,17 @@ class RecipeSerializer(serializers.ModelSerializer):
             ).first()
             return like.id if like else None
         return None
+    
+    def get_average_rating(self, obj):
+        average = Rating.objects.filter(recipe=obj).aggregate(Avg('value'))['value__avg']
+        return average if average is not None else 0
+
 
     class Meta:
         model = Recipe
         fields = [
             'id', 'owner', 'created_at', 'updated_at', 'title', 'description',
             'image', 'ingredients', 'instructions', 'is_owner', 'profile_id',
-            'profile_image', 'like_id', 'likes_count', 'comments_count'
+            'profile_image', 'like_id', 'likes_count', 'comments_count', 'ratings_count',
+            'average_rating',
         ]
