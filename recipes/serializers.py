@@ -43,7 +43,8 @@ class RecipeSerializer(serializers.ModelSerializer):
         return None
     
     def get_average_rating(self, obj):
-        average = Rating.objects.filter(recipe=obj).aggregate(Avg('value'))['value__avg']
+        average = Rating.objects.filter(
+            recipe=obj).aggregate(Avg('value'))['value__avg']
         return average if average is not None else 0
 
 
