@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions
 from tastehub_drf.permissions import IsOwnerOrReadOnly
-from .models import Comment
-from .serializers import CommentSerializer, CommentDetailSerializer
+from comments.models import Comment
+from comments.serializers import CommentSerializer, CommentDetailSerializer
 
 
 class CommentList(generics.ListCreateAPIView):
