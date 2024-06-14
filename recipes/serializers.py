@@ -49,5 +49,5 @@ class RecipeSerializer(serializers.ModelSerializer):
             'id', 'owner', 'created_at', 'updated_at', 'title', 'description',
             'image', 'ingredients', 'instructions', 'is_owner', 'profile_id',
             'profile_image', 'like_id', 'likes_count', 'comments_count', 'ratings_count',
-            'ratings_average',
+            'ratings_average'
         ]
