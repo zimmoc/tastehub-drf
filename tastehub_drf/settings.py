@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import re
 
 if os.path.exists('env.py'):
     import env
@@ -110,15 +111,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    os.environ.get('CLIENT_ORIGIN'),
-    "http://localhost:3000",
-    "http://127.0.0.1:8000"
-]
-# Add local development origin if CLIENT_ORIGIN_DEV is set
-if 'CLIENT_ORIGIN_DEV' in os.environ:
-    dev_origin = os.environ.get('CLIENT_ORIGIN_DEV')
-    CORS_ALLOWED_ORIGINS.append(dev_origin)
+# CORS_ALLOWED_ORIGINS = [
+#     os.environ.get('CLIENT_ORIGIN'),
+#     "http://localhost:3000",
+#     "http://127.0.0.1:8000"
+# ]
+# # Add local development origin if CLIENT_ORIGIN_DEV is set
+# if 'CLIENT_ORIGIN_DEV' in os.environ:
+#     dev_origin = os.environ.get('CLIENT_ORIGIN_DEV')
+#     CORS_ALLOWED_ORIGINS.append(dev_origin)
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
