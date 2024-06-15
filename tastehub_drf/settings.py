@@ -50,7 +50,7 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
+    'USER_DETAILS_SERIALIZER': 'tastehub_drf.serializers.CurrentUserSerializer'
 }
 
 
@@ -90,7 +90,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount', 
     'dj_rest_auth.registration',
     'corsheaders',
-
     'profiles',
     'recipes',
     'likes',
@@ -101,6 +100,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -108,7 +108,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
