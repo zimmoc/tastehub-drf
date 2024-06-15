@@ -111,16 +111,15 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [os.environ.get('CLIENT_ORIGIN')]
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get('CLIENT_ORIGIN'),
+    "http://localhost:3000",
+    "http://127.0.0.1:8000"
+]
 # Add local development origin if CLIENT_ORIGIN_DEV is set
 if 'CLIENT_ORIGIN_DEV' in os.environ:
     dev_origin = os.environ.get('CLIENT_ORIGIN_DEV')
     CORS_ALLOWED_ORIGINS.append(dev_origin)
-
-if 'CLIENT_ORIGIN_DEV_LOCAL' in os.environ:
-    dev_origin_local = os.environ.get('CLIENT_ORIGIN_DEV_LOCAL')
-    if dev_origin_local:
-        CORS_ALLOWED_ORIGINS.append(dev_origin_local)
 
 CORS_ALLOW_CREDENTIALS = True
 
