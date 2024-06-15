@@ -115,7 +115,8 @@ CORS_ALLOWED_ORIGINS = [os.environ.get('CLIENT_ORIGIN')]
 # Add local development origin if CLIENT_ORIGIN_DEV is set
 if 'CLIENT_ORIGIN_DEV' in os.environ:
     dev_origin = os.environ.get('CLIENT_ORIGIN_DEV')
-    CORS_ALLOWED_ORIGINS.append(dev_origin)
+    dev_origin_local = os.environ.get('CLIENT_ORIGIN_DEV_LOCAL')
+    CORS_ALLOWED_ORIGINS.append(dev_origin, dev_origin_local)
 
 CORS_ALLOW_CREDENTIALS = True
 
