@@ -49,11 +49,6 @@ class RecipeSerializer(serializers.ModelSerializer):
     def get_updated_at(self, obj):
         return naturaltime(obj.updated_at)
     
-    def update(self, instance, validated_data):
-        request = self.context.get('request')
-        if request and 'no_new_image' in request.data:
-            validated_data.pop('image', None)
-        return super().update(instance, validated_data)
 
 
     class Meta:
