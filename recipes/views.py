@@ -49,3 +49,6 @@ class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
         comments_count = Count('comment', distinct=True),
         likes_count = Count('likes', distinct=True),
     ).order_by('-created_at')
+
+    def perform_update(self, serializer):
+        serializer.save()
