@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import ArrayField
+from django.db.models import JSONField
 
 
 class Recipe(models.Model):
@@ -10,8 +10,8 @@ class Recipe(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='images/recipes/')
-    ingredients = ArrayField(models.CharField(max_length=255), blank=True, default=list)
-    instructions = ArrayField(models.TextField(), blank=True, default=list)
+    ingredients = JSONField(blank=True, default=list, null=True)
+    instructions = JSONField(blank=True, default=list, null=True)
 
     class Meta:
         ordering = ['-created_at']
