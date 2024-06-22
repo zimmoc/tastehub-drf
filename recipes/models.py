@@ -9,8 +9,8 @@ class Recipe(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='images/recipes/')
-    ingredients = models.TextField()
-    instructions = models.TextField()
+    ingredients = ArrayField(models.CharField(max_length=255), blank=True, default=list)
+    instructions = ArrayField(models.TextField(), blank=True, default=list)
 
     class Meta:
         ordering = ['-created_at']
