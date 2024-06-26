@@ -1,114 +1,531 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# TasteHub
 
-Welcome Hampus Hjortsberg,
+TasteHub wants to bring food lovers together to share and find new recipes. It's here to make cooking fun and social. You can explore different recipes, like your favorites, and connect with others who love to cook. By letting you like, comment, and follow other users, TasteHub makes it easy to learn and enjoy cooking more.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **May 28, 2024**
+##### [Live demo page](https://tastehub-c1a3a811ccbe.herokuapp.com/)
 
-## Gitpod Reminders
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+![Responsive Mockup](/readme/all-devices-black.png)
 
-`python3 -m http.server`
+## General
 
-A blue button should appear to click: _Make Public_,
+This is the API for the TasteHub backend application. More detailed information about development and content can be found in the frontend readme.
 
-Another blue button should appear to click: _Open Browser_.
+- The TasteHub [frontend repository](https://github.com/zimmoc/tastehub)
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
+## Database and Model
 
-A blue button should appear to click: _Make Public_,
+In the development environment, TasteHub utilizes SQLite, which is easy to set up and perfect for development and testing purposes. For the production environment, PostgreSQL is employed because of its robustness, scalability, and advanced features, making it well-suited for managing a live web application.
 
-Another blue button should appear to click: _Open Browser_.
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+__Recipe Model__
+- **Fields**: owner, created_at, updated_at, title, description, image, ingredients, instructions
+- **Purpose**: Stores recipes created by users.
+- **Usage**: Central to the application's content, allowing users to share and manage their recipes.
 
-To log into the Heroku toolbelt CLI:
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+__Comment Model__
+- **Fields**: owner, recipe, created_at, updated_at, content
+- **Purpose**: Stores comments made by users on recipes.
+- **Usage**: Allows users to engage with recipes by commenting.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
+__Follower Model__
+- **Fields**: owner, followed, created_at
+- **Purpose**: Manages follower relationships between users.
+- **Usage**: Enables users to follow each other, creating a personalized feed.
 
-------
+__Like Model__
+- **Fields**: owner, recipe, created_at
+- **Purpose**: Stores likes on recipes by users.
+- **Usage**: Allows users to express appreciation for recipes.
 
-## Release History
+__Profile Model__
+- **Fields**: owner, created_at, updated_at, bio, name, image
+- **Purpose**: Stores user profile information.
+- **Usage**: Allows users to customize their profiles with bio, name, and profile picture.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+__Rating Model__
+- **Fields**: owner, created_at, updated_at, recipe, value
+- **Purpose**: Stores ratings given by users to recipes (currently unused).
+- **Usage**: Prepared for future implementation to allow users to rate recipes.
 
-**May 28 2024:** Fix Mongo and Links installs
 
-**April 26 2024:** Update node version to 16
+#### Entity-Relationship Diagram
 
-**September 20 2023:** Update Python version to 3.9.17.
+The final database schema is essentially the same, but with some changes to the types of fields due to the limitations of the website I used.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+![erd](/readme/erd.png)
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+## Technologies
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+### Language
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+- [Python](https://www.python.org/): Serves as the back-end programming language.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+### Framework
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+- [Django Rest Framework (DRF)](https://www.django-rest-framework.org/): Used to create the API.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+<details>
+<summary>Tools and Services</summary>
+<br>
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+- **[Git](https://git-scm.com/)**: Utilized for version control, enabling you to track changes and collaborate on code effectively.
+- **[GitHub](https://github.com/)**: Essential for hosting repositories, facilitating version control, collaboration, and secure online code storage.
+- **[Gitpod](https://gitpod.io/)**: Streamlines the development process with a pre-configured, cloud-based development environment that's ready for coding instantly.
+- **[Google Dev Tools](https://developers.google.com/web/tools)**: Used for testing, debugging, and styling during development.
+- **[Heroku](https://www.heroku.com/)**: A platform for deploying and hosting web applications, ensuring your app is accessible online.
+- **[PostgreSQL](https://dbs.ci-dbs.net/)**: Provided by Code Institute, this database system is used for its robustness and compatibility with Django.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+</details>
+<br>
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+## Testing
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+### Automated testing
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+<details>
+<summary>comments</summary>
 
-------
+### Summary
 
-## FAQ about the uptime script
+These tests cover the essential functionalities of the Comment model in the application. They ensure that users can create, retrieve, update, and delete comments, as well as prevent unauthorized users from modifying or deleting comments. The tests also validate that the application's data integrity is maintained by ensuring that only the comment owner can perform update and delete operations.
 
-**Why have you added this script?**
+<hr />
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+**test_create_comment**
+- **Purpose**: To verify that a comment can be successfully created.
+- **What was tested**: 
+  - Posting a new comment to the comments endpoint.
+  - Checking the response status code.
+  - Ensuring the comment is correctly added to the database.
+  - Verifying the content, recipe, and owner of the newly created comment.
+- **Why**: To ensure that the comment creation functionality works as expected and stores the comment details correctly.
 
-**How will this affect me?**
+<hr />
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+**test_retrieve_comments_list**
+- **Purpose**: To verify that a list of comments can be retrieved.
+- **What was tested**: 
+  - Sending a GET request to retrieve all comments.
+  - Checking the response status code.
+  - Ensuring the correct number of comments is returned.
+  - Verifying the content of the retrieved comments.
+- **Why**: To ensure that the comments list endpoint returns the correct data.
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+<hr />
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+**test_retrieve_comment_detail**
+- **Purpose**: To verify that a specific comment can be retrieved by its ID.
+- **What was tested**: 
+  - Sending a GET request to retrieve a specific comment by ID.
+  - Checking the response status code.
+  - Verifying the content of the retrieved comment.
+- **Why**: To ensure that the comment detail endpoint returns the correct data for a given comment ID.
 
-**So….?**
+<hr />
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+**test_update_comment**
+- **Purpose**: To verify that a comment can be updated by its owner.
+- **What was tested**: 
+  - Sending a PUT request to update the content of a comment.
+  - Checking the response status code.
+  - Ensuring the comment content is updated in the database.
+- **Why**: To ensure that the comment update functionality works as expected and only the owner can update the comment.
 
-**Can I opt out?**
+<hr />
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+**test_delete_comment**
+- **Purpose**: To verify that a comment can be deleted by its owner.
+- **What was tested**: 
+  - Sending a DELETE request to delete a comment.
+  - Checking the response status code.
+  - Ensuring the comment is removed from the database.
+- **Why**: To ensure that the comment deletion functionality works as expected and only the owner can delete the comment.
 
+<hr />
+
+**test_non_owner_cannot_update_comment**
+- **Purpose**: To verify that a comment cannot be updated by a user who is not the owner.
+- **What was tested**: 
+  - Attempting to update a comment by a non-owner.
+  - Checking the response status code.
+  - Ensuring the comment content is not changed in the database.
+- **Why**: To ensure that only the comment owner can update the comment, maintaining data integrity and security.
+
+<hr />
+
+**test_non_owner_cannot_delete_comment**
+- **Purpose**: To verify that a comment cannot be deleted by a user who is not the owner.
+- **What was tested**: 
+  - Attempting to delete a comment by a non-owner.
+  - Checking the response status code.
+  - Ensuring the comment is not removed from the database.
+- **Why**: To ensure that only the comment owner can delete the comment, maintaining data integrity and security.
+
+<hr />
+
+</details>
+
+<details>
+<summary>followers</summary>
+
+### Summary
+
+These tests cover the essential functionalities of the Follower model in the application. They ensure that users can follow and unfollow other users, retrieve lists and details of followers, and that the application maintains data integrity by preventing duplicate follower relationships and unauthorized deletions.
+
+<hr />
+
+**test_create_follower**
+- **Purpose**: To verify that a user can successfully follow another user.
+- **What was tested**:
+  - Posting a new follower relationship to the followers endpoint.
+  - Checking the response status code.
+  - Ensuring the follower relationship is correctly added to the database.
+  - Verifying the owner and followed user of the newly created follower relationship.
+- **Why**: To ensure that the follower creation functionality works as expected and stores the follower details correctly.
+
+<hr />
+
+**test_retrieve_followers_list**
+- **Purpose**: To verify that a list of followers can be retrieved.
+- **What was tested**:
+  - Sending a GET request to retrieve all followers.
+  - Checking the response status code.
+  - Ensuring the correct number of followers is returned.
+  - Verifying the owner of the retrieved followers.
+- **Why**: To ensure that the followers list endpoint returns the correct data.
+
+<hr />
+
+**test_retrieve_follower_detail**
+- **Purpose**: To verify that a specific follower can be retrieved by its ID.
+- **What was tested**:
+  - Sending a GET request to retrieve a specific follower by ID.
+  - Checking the response status code.
+  - Verifying the owner of the retrieved follower.
+- **Why**: To ensure that the follower detail endpoint returns the correct data for a given follower ID.
+
+<hr />
+
+**test_delete_follower**
+- **Purpose**: To verify that a user can unfollow another user.
+- **What was tested**:
+  - Sending a DELETE request to delete a follower relationship.
+  - Checking the response status code.
+  - Ensuring the follower relationship is removed from the database.
+- **Why**: To ensure that the follower deletion functionality works as expected and allows users to unfollow others.
+
+<hr />
+
+**test_cannot_follow_twice**
+- **Purpose**: To verify that a user cannot follow the same user twice.
+- **What was tested**:
+  - Attempting to create a duplicate follower relationship.
+  - Checking the response status code.
+  - Ensuring the follower relationship is not duplicated in the database.
+- **Why**: To ensure that the follower creation functionality prevents duplicates, maintaining data integrity.
+
+<hr />
+
+**test_non_owner_cannot_delete_follower**
+- **Purpose**: To verify that a user cannot delete another user's follower relationship.
+- **What was tested**:
+  - Attempting to delete a follower relationship by a non-owner.
+  - Checking the response status code.
+  - Ensuring the follower relationship is not removed from the database.
+- **Why**: To ensure that only the follower relationship owner can delete the follower relationship, maintaining data integrity and security.
+
+<hr />
+
+</details>
+
+<details>
+<summary>likes</summary>
+
+### Summary
+These tests cover the essential functionalities of the Like model in the application. They ensure that users can like and unlike recipes, retrieve lists and details of likes, and that the application maintains data integrity by preventing duplicate likes and unauthorized deletions.
+
+<hr />
+
+**test_create_like**
+- **Purpose**: To verify that a new like can be created for a recipe by a different user.
+- **What was tested**:
+  - Creating a like for a recipe by a different user.
+  - Checking the response status code.
+  - Ensuring the like is added to the database with the correct owner and recipe.
+- **Why**: To confirm that users can like recipes, ensuring the like functionality works as intended.
+
+<hr />
+
+**test_retrieve_likes_list**
+- **Purpose**: To verify that the list of likes can be retrieved correctly.
+- **What was tested**:
+  - Retrieving the list of likes for a user.
+  - Checking the response status code.
+  - Ensuring the correct number of likes and their details are returned.
+- **Why**: To ensure the API returns the correct list of likes, facilitating the display of liked recipes.
+
+<hr />
+
+**test_retrieve_like_detail**
+- **Purpose**: To verify that the details of a single like can be retrieved correctly.
+- **What was tested**:
+  - Retrieving the details of a specific like.
+  - Checking the response status code.
+  - Ensuring the correct details of the like are returned.
+- **Why**: To confirm that users can view details of their likes, providing necessary information about who liked a recipe and when.
+
+<hr />
+
+**test_delete_like**
+- **Purpose**: To verify that a like can be deleted by its owner.
+- **What was tested**:
+  - Deleting a like.
+  - Checking the response status code.
+  - Ensuring the like is removed from the database.
+- **Why**: To confirm that users can remove their likes, giving them control over their interactions with recipes.
+
+<hr />
+
+**test_cannot_like_twice**
+- **Purpose**: To verify that a user cannot like the same recipe more than once.
+- **What was tested**:
+  - Attempting to like a recipe twice within a transaction block.
+  - Checking the response status code.
+  - Ensuring no duplicate like is added to the database.
+- **Why**: To maintain data integrity by preventing duplicate likes, ensuring accurate like counts.
+
+<hr />
+
+**test_non_owner_cannot_delete_like**
+- **Purpose**: To verify that a user cannot delete another user's like.
+- **What was tested**:
+  - Attempting to delete a like by a non-owner.
+  - Checking the response status code.
+  - Ensuring the like is not removed from the database.
+- **Why**: To ensure that only the owner of the like can delete it, preserving the authenticity of user interactions.
+
+</details>
+
+<details>
+<summary>profiles</summary>
+
+### Summary
+These tests cover the essential functionalities of the Profile model in the application. They ensure that profiles are created upon user registration, users can retrieve and update their profiles, and that data integrity is maintained by preventing unauthorized users from updating profiles they do not own. This is crucial for maintaining user privacy and ensuring that profile data is accurate and secure.
+
+<hr />
+
+**test_create_profile**
+- **Purpose**: To verify the creation of a profile upon user registration.
+- **What was tested**:
+  - Fetching profiles list to ensure profiles are created.
+  - Checking the response status code.
+  - Ensuring the correct number of profiles is returned.
+- **Why**: To ensure that profiles are correctly created for new users.
+
+<hr />
+
+**test_retrieve_profiles_list**
+- **Purpose**: To verify that the list of profiles can be retrieved.
+- **What was tested**:
+  - Retrieving the list of profiles.
+  - Checking the response status code.
+  - Ensuring the correct number of profiles and correct data is returned.
+- **Why**: To ensure that profiles can be listed, which is essential for displaying user information.
+
+<hr />
+
+**test_retrieve_profile_detail**
+- **Purpose**: To verify that a specific profile can be retrieved.
+- **What was tested**:
+  - Retrieving a specific profile's details.
+  - Checking the response status code.
+  - Ensuring the correct profile data is returned.
+- **Why**: To ensure that individual profile details can be fetched, which is necessary for viewing user profiles.
+
+<hr />
+
+**test_update_profile**
+- **Purpose**: To verify that a user can update their profile.
+- **What was tested**:
+  - Updating profile details.
+  - Checking the response status code.
+  - Ensuring the profile data is updated in the database.
+- **Why**: To ensure that users can modify their profile information.
+
+<hr />
+
+**test_non_owner_cannot_update_profile**
+- **Purpose**: To verify that users cannot update profiles they do not own.
+- **What was tested**:
+  - Attempting to update another user's profile.
+  - Checking the response status code.
+  - Ensuring the profile data is not updated in the database.
+- **Why**: To maintain data integrity and security by ensuring that only profile owners can update their profiles.
+
+<hr />
+
+</details>
+
+<details>
+<summary>recipes</summary>
+
+### Summary
+These tests cover the core functionalities of the Recipe model in the application. They ensure that users can create, retrieve, update, and delete recipes, while also enforcing permissions so that only the recipe owner can make modifications or deletions.
+
+<hr />
+
+**test_create_recipe**
+- **Purpose**: To verify that a user can create a new recipe.
+- **What was tested**:
+  - Creating a new recipe with valid data.
+  - Checking the response status code.
+  - Ensuring the new recipe is added to the database.
+- **Why**: To confirm that the recipe creation functionality works as intended.
+
+<hr />
+
+**test_retrieve_recipes_list**
+- **Purpose**: To ensure the recipes list can be retrieved.
+- **What was tested**:
+  - Retrieving the list of recipes.
+  - Checking the response status code.
+  - Verifying the correct number of recipes is returned.
+- **Why**: To verify that the recipe listing functionality works correctly.
+
+<hr />
+
+**test_retrieve_recipe_detail**
+- **Purpose**: To ensure that a specific recipe's details can be retrieved.
+- **What was tested**:
+  - Retrieving a specific recipe's details.
+  - Checking the response status code.
+  - Verifying the returned recipe details are correct.
+- **Why**: To confirm that the recipe detail retrieval functionality works as expected.
+
+<hr />
+
+**test_update_recipe**
+- **Purpose**: To verify that a user can update their own recipe.
+- **What was tested**:
+  - Updating a recipe's details.
+  - Checking the response status code.
+  - Ensuring the recipe details are updated in the database.
+- **Why**: To ensure that the recipe update functionality works correctly.
+
+<hr />
+
+**test_delete_recipe**
+- **Purpose**: To verify that a user can delete their own recipe.
+- **What was tested**:
+  - Deleting a recipe.
+  - Checking the response status code.
+  - Ensuring the recipe is removed from the database.
+- **Why**: To confirm that the recipe deletion functionality works as intended.
+
+<hr />
+
+**test_non_owner_cannot_update_recipe**
+- **Purpose**: To ensure that a user cannot update another user's recipe.
+- **What was tested**:
+  - Attempting to update another user's recipe.
+  - Checking the response status code.
+  - Ensuring the recipe details are not changed in the database.
+- **Why**: To maintain data integrity and security by preventing unauthorized updates.
+
+<hr />
+
+**test_non_owner_cannot_delete_recipe**
+- **Purpose**: To ensure that a user cannot delete another user's recipe.
+- **What was tested**:
+  - Attempting to delete another user's recipe.
+  - Checking the response status code.
+  - Ensuring the recipe is not removed from the database.
+- **Why**: To maintain data integrity and security by preventing unauthorized deletions.
+
+<hr />
+
+</details>
+
+### Manual testing
+
+## Deployment
+
+#### Heroku Deployment
+The site was deployed to Heroku. The steps to deploy are as follows:
+
+Prerequisites:
+- Create 'Procfile' in your project folder(Note caps and no file tag)
+- Add this
+
+```bash
+release: python manage.py makemigrations && python manage.py migrate
+web: gunicorn tastehub_drf.wsgi
 ```
-pkill uptime.sh
-rm .vscode/uptime.sh
+- Freeze and export our installed libraries
+    - pip freeze --local > requirements.txt
+
+<hr>
+
+- Navigate to heroku and create an account
+- Click the new button in the top right corner
+- Select create new app
+- Enter app name
+- Select region and click create app
+- Go to the settings tab and then click reveal config vars
+- Make sure the following config vars exist:
+  - SECRET_KEY: (Your secret key)
+  - DATABASE_URL: (Database url)
+  - CLOUDINARY_URL: (cloudinary api url)
+  - ALLOWED_HOST: (url of heroku app you just created)
+  - CLIENT_ORIGIN: (Frontend url)
+  - CLIENT_ORIGIN_DEV: (frontend url when running the server in your dev env.)
+- Click the deploy tab
+- Scroll down to Connect to GitHub and sign in / authorize when prompted
+- In the search box, find the repositoy you want to deploy and click connect
+- Scroll down to Manual deploy and choose the main branch
+- Click deploy
+- Double check that the worker(Dyno) is enabled under resources
+
+The app should now be deployed.
+
+
+# Run Locally
+Note that you need your own Postgres database and Cloudinary api.
+
+Clone the project
+
+```bash
+  git clone https://github.com/zimmoc/tastehub-drf.git
 ```
 
-**Anything more?**
+Install dependencies
+- Recommended to do this in a virtual python env
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
 
----
+```bash
+  pip install -r requirements.txt
+```
 
-Happy coding!
+Set environment variables in env.py file
+
+```bash
+import os
+
+os.environ['CLOUDINARY_URL']= ""
+os.environ['DEV'] = '1' // # Debug mode on
+os.environ['DATABASE_URL'] = ""
+os.environ.setdefault("SECRET_KEY", "YOUR_KEY_GOES_HERE")
+os.environ['CLIENT_ORIGIN'] = "http://localhost"
+os.environ['CLIENT_ORIGIN_DEV'] = "http://localhost"
+```
+
+Start the server
+
+```bash
+  python3 manage.py runserver
+```
