@@ -10,7 +10,7 @@ TasteHub wants to bring food lovers together to share and find new recipes. It's
 
 ## General
 
-This is the API for the TasteHub backend application. More detailed information about development and content can be found in the frontend readme.
+This is the API for the TasteHub backend application. This readme will only contain documentation related to the models, database, and testing of them. More detailed information about the full application can be found in the frontend readme, which is much more extensive.
 
 - The TasteHub [frontend repository](https://github.com/zimmoc/tastehub)
 
