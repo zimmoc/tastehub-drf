@@ -453,6 +453,225 @@ These tests cover the core functionalities of the Recipe model in the applicatio
 
 ### Manual testing
 
+<details>
+  <summary>comments</summary>
+
+  <hr />
+  
+  **Test: Create Comment**
+  - **Purpose**: To verify that a logged-in user can create a comment on a recipe.
+  - **Expected Result**: The comment should be successfully created and associated with the correct recipe and user.
+  - **Method**:
+    1. Log in as a test user.
+    2. Send a POST request to `/comments/` with the recipe ID and comment content.
+    3. Check the response status and data.
+  - **Result**:
+    - Status code: 201 Created
+    - Response contains the new comment data with correct recipe and user IDs.
+
+    <hr />
+  
+  **Test: Retrieve Comments List**
+  - **Purpose**: To verify that the comments list can be retrieved.
+  - **Expected Result**: A list of comments is retrieved and displayed.
+  - **Method**:
+    1. Log in as a test user.
+    2. Send a GET request to `/comments/`.
+    3. Check the response status and data.
+  - **Result**:
+    - Status code: 200 OK
+    - Response contains a list of comments.
+
+    <hr />
+  
+  **Test: Update Comment**
+  - **Purpose**: To verify that a user can update their own comment.
+  - **Expected Result**: The comment is successfully updated.
+  - **Method**:
+    1. Log in as the comment owner.
+    2. Send a PUT request to `/comments/{id}` with the updated content.
+    3. Check the response status and data.
+  - **Result**:
+    - Status code: 200 OK
+    - Response contains the updated comment data.
+
+    <hr />
+  
+  **Test: Delete Comment**
+  - **Purpose**: To verify that a user can delete their own comment.
+  - **Expected Result**: The comment is successfully deleted.
+  - **Method**:
+    1. Log in as the comment owner.
+    2. Send a DELETE request to `/comments/{id}`.
+    3. Check the response status.
+  - **Result**:
+    - Status code: 204 No Content
+    - Comment is removed from the database.
+
+    <hr />
+  
+</details>
+
+
+
+<details>
+  <summary>followers</summary>
+
+  <hr />
+
+**Test: Follow User**
+- **Purpose**: To verify that a user can follow another user.
+- **Expected Result**: The user is successfully followed.
+- **Method**:
+  1. Log in as a test user.
+  2. Send a POST request to `/followers/` with the followed user ID.
+  3. Check the response status and data.
+- **Result**: 
+  - Status code: 201 Created
+  - Response contains the new follower data.
+
+  <hr />
+
+**Test: Unfollow User**
+- **Purpose**: To verify that a user can unfollow another user.
+- **Expected Result**: The user is successfully unfollowed.
+- **Method**:
+  1. Log in as a test user.
+  2. Send a DELETE request to `/followers/{id}`.
+  3. Check the response status.
+- **Result**: 
+  - Status code: 204 No Content
+  - Follower relationship is removed from the database.
+
+  <hr />
+
+  </details>
+
+
+<details>
+  <summary>likes</summary>
+
+  <hr />
+
+**Test: Like Recipe**
+- **Purpose**: To verify that a user can like a recipe.
+- **Expected Result**: The recipe is successfully liked.
+- **Method**:
+  1. Log in as a test user.
+  2. Send a POST request to `/likes/` with the recipe ID.
+  3. Check the response status and data.
+- **Result**: 
+  - Status code: 201 Created
+  - Response contains the new like data.
+
+  <hr />
+
+**Test: Unlike Recipe**
+- **Purpose**: To verify that a user can unlike a recipe.
+- **Expected Result**: The recipe is successfully unliked.
+- **Method**:
+  1. Log in as a test user.
+  2. Send a DELETE request to `/likes/{id}`.
+  3. Check the response status.
+- **Result**: 
+  - Status code: 204 No Content
+  - Like is removed from the database.
+
+  <hr />
+
+  </details>
+
+<details>
+  <summary>profiles</summary>
+
+  <hr />
+
+**Test: View Profile**
+- **Purpose**: To verify that a user can view their profile and other users' profiles.
+- **Expected Result**: The profile information is displayed correctly.
+- **Method**:
+  1. Send a GET request to `/profiles/{id}`.
+  2. Check the response status and data.
+- **Result**: 
+  - Status code: 200 OK
+  - Response contains the profile information.
+
+  <hr />
+
+**Test: Edit Profile**
+- **Purpose**: To verify that a user can edit their profile information.
+- **Expected Result**: The profile is successfully updated.
+- **Method**:
+  1. Log in as a test user.
+  2. Send a PUT request to `/profiles/{id}` with updated profile data.
+  3. Check the response status and data.
+- **Result**: 
+  - Status code: 200 OK
+  - Response contains the updated profile data.
+
+  <hr />
+
+  </details>
+
+<details>
+  <summary>recipes</summary>
+
+  <hr />
+
+**Test: Create Recipe**
+- **Purpose**: To verify that a user can create a new recipe.
+- **Expected Result**: The recipe is successfully created and listed.
+- **Method**:
+  1. Log in as a test user.
+  2. Send a POST request to `/recipes/` with the recipe data.
+  3. Check the response status and data.
+- **Result**: 
+  - Status code: 201 Created
+  - Response contains the new recipe data.
+
+  <hr />
+
+**Test: View Recipe**
+- **Purpose**: To verify that a user can view a recipe's details.
+- **Expected Result**: The recipe details are displayed correctly.
+- **Method**:
+  1. Send a GET request to `/recipes/{id}`.
+  2. Check the response status and data.
+- **Result**: 
+  - Status code: 200 OK
+  - Response contains the recipe details.
+
+  <hr />
+
+**Test: Edit Recipe**
+- **Purpose**: To verify that a user can edit their own recipe.
+- **Expected Result**: The recipe is successfully updated.
+- **Method**:
+  1. Log in as the recipe owner.
+  2. Send a PUT request to `/recipes/{id}` with updated recipe data.
+  3. Check the response status and data.
+- **Result**: 
+  - Status code: 200 OK
+  - Response contains the updated recipe data.
+
+  <hr />
+
+**Test: Delete Recipe**
+- **Purpose**: To verify that a user can delete their own recipe.
+- **Expected Result**: The recipe is successfully deleted.
+- **Method**:
+  1. Log in as the recipe owner.
+  2. Send a DELETE request to `/recipes/{id}`.
+  3. Check the response status.
+- **Result**: 
+  - Status code: 204 No Content
+  - Recipe is removed from the database.
+
+  <hr />
+
+  </details>
+
+
 ## Deployment
 
 #### Heroku Deployment
